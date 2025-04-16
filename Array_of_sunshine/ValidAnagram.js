@@ -109,3 +109,25 @@ const isAnagram = function (s, t) {
 
 console.log(isAnagram('racecar', 'carrace'));
 console.log(isAnagram('jar', 'jam'));
+
+const my_anagram = (s, t) => {
+  if (s.length !== t.length) {
+    return false;
+  }
+  // create a hashmap to store the count of each character in the string
+  const myMap = {};
+  for (const char of s) {
+    myMap[char] = (myMap[char] || 0) + 1;
+  }
+
+  for (const char of t) {
+    if (!myMap[char]) {
+      return false;
+    }
+    myMap[char] -= 1;
+  }
+  return true;
+};
+
+console.log(my_anagram('racecar', 'carrace'));
+console.log(my_anagram('jar', 'jam'));
