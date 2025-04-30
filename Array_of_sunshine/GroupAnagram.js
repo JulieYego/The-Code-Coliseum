@@ -56,3 +56,22 @@ const groupAnagrams = function (strs) {
 };
 
 console.log(groupAnagrams(['act', 'pots', 'tops', 'cat', 'stop', 'hat']));
+
+const sort_anagram = function (strs) {
+  const map = new Map();
+  for (const word of strs) {
+    const count = Array(26).fill(0);
+    for (const char of word) {
+      count[char.charCodeAt(0) - 'a'.charCodeAt(0)]++;
+    }
+    const key = count.join('#');
+
+    if (!map.has(key)) {
+      map.set(key, []);
+    }
+    map.get(key).push(word);
+  }
+  return Array.from(map.values());
+};
+
+sort_anagram(['act', 'pots', 'tops', 'cat', 'stop', 'hat']);
