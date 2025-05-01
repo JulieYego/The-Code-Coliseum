@@ -30,15 +30,17 @@
 // }
 
 function topKFrequent(nums, k) {
-  myObj = {};
-  myArr = [];
+  // space complexity is O(n)
+  // time complexity is
+  freqObj = {};
   for (const num of nums) {
-    myObj[num] = (myObj[num] || 0) + 1;
+    // JS sort is O(n log n)
+    freqObj[num] = (freqObj[num] || 0) + 1;
   }
-  const sorted = Object.entries(myObj).sort((a, b) => b[1] - a[1]);
-  console.log(sorted.splice(0, k));
-
-  return myArr;
+  return Object.entries(freqObj)
+    .sort((a, b) => b - a)
+    .slice(0, k)
+    .map((key) => +key[0]);
 }
 
 console.log(topKFrequent([1, 2, 2, 3, 3, 3, 7], 2)); // [2,3]
