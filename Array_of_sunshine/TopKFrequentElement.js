@@ -37,11 +37,15 @@ function topKFrequent(nums, k) {
     // JS sort is O(n log n)
     freqObj[num] = (freqObj[num] || 0) + 1;
   }
-  return Object.entries(freqObj)
-    .sort((a, b) => b - a)
-    .slice(0, k)
-    .map((key) => +key[0]);
+  return (
+    Object.entries(freqObj)
+      // .sort((a, b) => b[1] - a[1])
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, k)
+      .map((key) => +key[0])
+  );
 }
 
 console.log(topKFrequent([1, 2, 2, 3, 3, 3, 7], 2)); // [2,3]
 console.log(topKFrequent([7, 7], 1)); // [7]
+console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
