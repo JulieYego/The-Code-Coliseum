@@ -24,12 +24,32 @@
 //   isPalindrome(s) {}
 // }
 
+// function isPalindrome(s) {
+//   const cleaned = s.replace(/[^a-z0-9]/gi, '').toLowerCase(); // O(n)
+//   const reversed = cleaned.split('').reverse().join(''); // O(n)
+//   return cleaned === reversed;
+// }
+
 function isPalindrome(s) {
-  const cleaned = s.replace(/[^a-z0-9]/gi, '').toLowerCase();
-  const reversed = cleaned.split('').reverse().join('');
-  return cleaned === reversed;
+  left = 0;
+  right = s.length - 1;
+  while (left < right) {
+    while (left < right && !isAlphaNumeric(s[left])) left++;
+    while (left < right && !isAlphaNumeric(s[right])) right--;
+    if (s.toLowerCase()[left] !== s.toLowerCase()[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+  return true;
+}
+
+function isAlphaNumeric(str) {
+  return /^[a-z0-9]$/i.test(str);
 }
 
 console.log(isPalindrome('Was it a car or a cat I saw?'));
 console.log(isPalindrome('tab a cat'));
-console.log(isPalindrome('A man, a plan, a canal: Panama')); // true
+console.log(isPalindrome('A man, a plan, a canal: Panama'));
+console.log(isPalindrome('!@#$%^&*()'));
