@@ -19,3 +19,24 @@
 // Constraints:
 // 0 <= s.length <= 5 * 104
 // s consists of English letters, digits, symbols and spaces.
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  left = 0;
+  right = 0;
+  s_set = new Set();
+  maxAmount = 0;
+  while (right < s.length) {
+    while (s_set.has(s[right])) {
+      s_set.delete(s[left]);
+      left++;
+    }
+    s_set.add(s[right]);
+    maxAmount = Math.max(maxAmount, right - left + 1);
+    right++;
+  }
+  return maxAmount;
+};
+console.log(lengthOfLongestSubstring('nnnnn'));
